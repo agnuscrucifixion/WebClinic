@@ -6,8 +6,6 @@ import com.padwicki.webclinic.model.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -41,5 +39,10 @@ public class PatientController implements PatientControllerInterface {
                               String newName, String newSurname,
                               String newDiagnostic, String newDrugs) {
         patientService.updatePatient(oldSerialNumber,newSerialNumber,newName,newSurname,newDiagnostic,newDrugs);
+    }
+
+    @Override
+    public void deletePatient(int serialNumber) {
+        patientService.deletePatient(serialNumber);
     }
 }

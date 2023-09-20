@@ -23,4 +23,7 @@ public interface PatientControllerInterface {
     public void updatePatient(@RequestParam int oldSerialNumber, @RequestParam int newSerialNumber,
                               @RequestParam String newName, @RequestParam String newSurname,
                               @RequestParam String newDiagnostic, @RequestParam String newDrugs);
+
+    @DeleteMapping("/delete-patient-by-serialNumber")
+    public void deletePatient(@RequestParam int serialNumber);
 }
