@@ -6,6 +6,9 @@ import com.padwicki.webclinic.model.serviceInjection.PatientServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,5 +30,21 @@ public class PatientService implements PatientServiceInterface {
     @Override
     public Patient getPatientBySerialNumber(int serialNumber) {
         return patientRepository.findPatientBySerialNumber(serialNumber);
+    }
+
+    @Override
+    public void addPatient(int serialNumber, String name, String surname,
+                           String diagnostic, String drugs) {
+        if (patientRepository.findPatientBySerialNumber(serialNumber) == null) {
+            Patient patient = new Patient();
+            patient.setSerialNumber(serialNumber);
+            patient.setName(name);
+            patient.setSurname(surname);
+            patient.setDiagnosis(diagnostic);
+            patient.setDrugs(drugs);
+            LocalDateTime localDateTime = LocalDateTime.now();
+            patient.setComingDate(Timestamp.valueOf(localDateTime));
+            patientRepository.save(patient);
+        }
     }
 }
