@@ -38,7 +38,7 @@ public class PatientController implements PatientControllerInterface {
     public void updatePatient(int oldSerialNumber, int newSerialNumber,
                               String newName, String newSurname,
                               String newDiagnostic, String newDrugs) {
-        patientService.updatePatient(oldSerialNumber,newSerialNumber,newName,newSurname,newDiagnostic,newDrugs);
+        patientService.updatePatient(oldSerialNumber, newSerialNumber, newName, newSurname, newDiagnostic, newDrugs);
     }
 
     @Override
