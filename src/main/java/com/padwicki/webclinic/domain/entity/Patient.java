@@ -14,7 +14,7 @@ public class Patient {
     @Id
     @Column(name = "id",nullable = false, unique = true)
     @SequenceGenerator(name = "patientsIdSeq", sequenceName = "patients_id_seq", allocationSize = 1, initialValue = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clientsIdSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patientsIdSeq")
     Long id;
 
     @Column(name = "serial_number",nullable = false,unique = true)
