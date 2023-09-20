@@ -47,4 +47,21 @@ public class PatientService implements PatientServiceInterface {
             patientRepository.save(patient);
         }
     }
+
+    @Override
+    public void updatePatient(int oldSerialNumber, int newSerialNumber,
+                              String newName, String newSurname,
+                              String newDiagnostic, String newDrugs) {
+        Patient patient = patientRepository.findPatientBySerialNumber(newSerialNumber);
+        if (patient == null) {
+            Patient oldPatient = patientRepository.findPatientBySerialNumber(oldSerialNumber);
+
+            oldPatient.setSerialNumber(newSerialNumber);
+            oldPatient.setName(newName);
+            oldPatient.setSurname(newSurname);
+            oldPatient.setDiagnosis(newDiagnostic);
+            oldPatient.setDrugs(newDrugs);
+            patientRepository.save(oldPatient);
+        }
+    }
 }

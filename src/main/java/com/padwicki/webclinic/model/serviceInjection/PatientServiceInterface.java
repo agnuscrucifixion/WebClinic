@@ -14,4 +14,7 @@ public interface PatientServiceInterface {
 
         public void addPatient(int serialNumber, String name, String surname,
                                String diagnostic, String drugs);
+        public void updatePatient(int oldSerialNumber, int newSerialNumber,
+                                  String newName, String newSurname,
+                                  String newDiagnostic, String newDrugs);
 }
