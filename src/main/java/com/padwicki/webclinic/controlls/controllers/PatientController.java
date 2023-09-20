@@ -35,4 +35,11 @@ public class PatientController implements PatientControllerInterface {
                            String diagnostic, String drugs) {
         patientService.addPatient(serialNumber, name,surname,diagnostic,drugs);
     }
+
+    @Override
+    public void updatePatient(int oldSerialNumber, int newSerialNumber,
+                              String newName, String newSurname,
+                              String newDiagnostic, String newDrugs) {
+        patientService.updatePatient(oldSerialNumber,newSerialNumber,newName,newSurname,newDiagnostic,newDrugs);
+    }
 }

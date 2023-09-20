@@ -18,4 +18,9 @@ public interface PatientControllerInterface {
     @PostMapping("/add_patient")
     public void addPatient(@RequestParam int serialNumber, @RequestParam String name, @RequestParam String surname,
                            @RequestParam String diagnostic, @RequestParam String drugs);
+
+    @PatchMapping("update-info-by-serialNumber")
+    public void updatePatient(@RequestParam int oldSerialNumber, @RequestParam int newSerialNumber,
+                              @RequestParam String newName, @RequestParam String newSurname,
+                              @RequestParam String newDiagnostic, @RequestParam String newDrugs);
 }
