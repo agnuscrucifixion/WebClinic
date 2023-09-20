@@ -8,15 +8,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PatientServiceInterface {
-        public List<Patient> getPatients();
+        List<Patient> getPatients();
 
-        public Patient getPatientBySerialNumber(int serialNumber);
+        Patient getPatientBySerialNumber(int serialNumber);
 
-        public void addPatient(int serialNumber, String name, String surname,
+        void addPatient(int serialNumber, String name, String surname,
                                String diagnostic, String drugs);
-        public void updatePatient(int oldSerialNumber, int newSerialNumber,
+        void updatePatient(int oldSerialNumber, int newSerialNumber,
                                   String newName, String newSurname,
                                   String newDiagnostic, String newDrugs);
 
-        public void deletePatient(int serialNumber);
+        void deletePatient(int serialNumber);
 }

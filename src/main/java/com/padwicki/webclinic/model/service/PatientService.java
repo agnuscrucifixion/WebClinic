@@ -4,14 +4,10 @@ import com.padwicki.webclinic.domain.entity.Patient;
 import com.padwicki.webclinic.domain.repository.PatientRepository;
 import com.padwicki.webclinic.model.serviceInjection.PatientServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
