@@ -17,4 +17,6 @@ public interface PatientServiceInterface {
         public void updatePatient(int oldSerialNumber, int newSerialNumber,
                                   String newName, String newSurname,
                                   String newDiagnostic, String newDrugs);
+
+        public void deletePatient(int serialNumber);
 }
