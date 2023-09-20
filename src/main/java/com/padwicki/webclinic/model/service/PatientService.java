@@ -65,7 +65,7 @@ public class PatientService implements PatientServiceInterface {
     }
 
     @Override
-    public void deletePatient(int serialNumber) throws NoSuchElementException{
+    public void deletePatient(int serialNumber) {
         Patient patient = patientRepository.findPatientBySerialNumber(serialNumber);
         if (patient != null) {
             patientRepository.delete(patient);

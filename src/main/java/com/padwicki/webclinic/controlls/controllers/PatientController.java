@@ -31,7 +31,7 @@ public class PatientController implements PatientControllerInterface {
     @Override
     public void addPatient(int serialNumber, String name, String surname,
                            String diagnostic, String drugs) {
-        patientService.addPatient(serialNumber, name,surname,diagnostic,drugs);
+        patientService.addPatient(serialNumber, name, surname, diagnostic, drugs);
     }
 
     @Override
