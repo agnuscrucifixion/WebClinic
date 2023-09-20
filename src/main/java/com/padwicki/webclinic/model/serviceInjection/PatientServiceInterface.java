@@ -3,8 +3,6 @@ package com.padwicki.webclinic.model.serviceInjection;
 
 import com.padwicki.webclinic.domain.entity.Patient;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PatientServiceInterface {

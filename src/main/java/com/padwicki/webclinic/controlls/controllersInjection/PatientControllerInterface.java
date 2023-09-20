@@ -3,8 +3,6 @@ package com.padwicki.webclinic.controlls.controllersInjection;
 import com.padwicki.webclinic.domain.entity.Patient;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequestMapping("/patient")

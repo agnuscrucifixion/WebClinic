@@ -1,11 +1,8 @@
 package com.padwicki.webclinic.domain.entity;
 
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Primary;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "patients")
