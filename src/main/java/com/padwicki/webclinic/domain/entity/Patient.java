@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.springframework.context.annotation.Primary;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "patients")
@@ -11,7 +13,8 @@ public class Patient {
 
     @Id
     @Column(name = "id",nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "patientsIdSeq", sequenceName = "patients_id_seq", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clientsIdSeq")
     Long id;
 
     @Column(name = "serial_number",nullable = false,unique = true)
@@ -31,6 +34,9 @@ public class Patient {
 
     @Column(name = "prescription_drugs",nullable = false)
     String drugs;
+
+    public Patient() {
+    }
 
     public Long getId() {
         return id;
