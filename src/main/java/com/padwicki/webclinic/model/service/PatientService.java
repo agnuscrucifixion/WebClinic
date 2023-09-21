@@ -109,7 +109,6 @@ public class PatientService implements PatientServiceInterface {
 
     }
 
-
     private boolean validateSerialNumber(int serialNumber) {
         return serialNumber > 0;
     }
