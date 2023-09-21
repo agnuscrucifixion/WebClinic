@@ -28,7 +28,7 @@ public class PatientController implements PatientControllerInterface {
 
     /**
      * Implementation of the controller method for receiving all patients by service.
-     * @return returns a list of all patients.
+     * @return a list of all patients.
      */
     @Override
     public List<Patient> getPatients() {
@@ -37,7 +37,7 @@ public class PatientController implements PatientControllerInterface {
 
     /**
      * Searches the database for a patient with a given serial number by service.
-     * @param serialNumber Patient's Serial Number.
+     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
      * @return returns a patient object with the specified serial number or null.
      */
     @Override
@@ -47,7 +47,7 @@ public class PatientController implements PatientControllerInterface {
 
     /**
      * Adds a patient to the database by service.
-     * @param serialNumber patient's Serial Number.
+     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
      * @param name patient's name.
      * @param surname patient's surname.
      * @param diagnostic patient's diagnostic.
@@ -61,8 +61,8 @@ public class PatientController implements PatientControllerInterface {
 
     /**
      * Updates patient information, changes information if given appropriate parameters by service.
-     * @param oldSerialNumber old patient's Serial Number.
-     * @param newSerialNumber new patient's Serial Number.
+     * @param oldSerialNumber old patient's Serial Number must be greater than 0 and less than 2147483647.
+     * @param newSerialNumber new patient's Serial Number must be greater than 0 and less than 2147483647.
      * @param newName new patient's name.
      * @param newSurname new patient's surname.
      * @param newDiagnostic new patient's diagnostic.
@@ -77,7 +77,7 @@ public class PatientController implements PatientControllerInterface {
 
     /**
      * Deleting a patient from the database by serial number by service.
-     * @param serialNumber patient's Serial Number.
+     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
      */
     @Override
     public void deletePatient(int serialNumber) {

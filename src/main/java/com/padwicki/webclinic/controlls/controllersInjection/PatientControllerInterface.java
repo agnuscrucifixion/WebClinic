@@ -19,7 +19,7 @@ public interface PatientControllerInterface {
 
     /**
      * An interface method with address "/show-patient-by-serialNumber".
-     * @param serialNumber patient's Serial Number.
+     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
      * @return patient class object
      */
     @GetMapping("/show-patient-by-serialNumber")
@@ -27,7 +27,7 @@ public interface PatientControllerInterface {
 
     /**
      * An interface method with address "/add_patient".
-     * @param serialNumber patient's Serial Number.
+     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
      * @param name patient's name.
      * @param surname patient's surname.
      * @param diagnostic patient's diagnostic.
@@ -39,8 +39,8 @@ public interface PatientControllerInterface {
 
     /**
      * An interface method with address "/update-info-by-serialNumber".
-     * @param oldSerialNumber old patient's Serial Number.
-     * @param newSerialNumber new patient's Serial Number.
+     * @param oldSerialNumber old patient's Serial Number must be greater than 0 and less than 2147483647.
+     * @param newSerialNumber new patient's Serial Number must be greater than 0 and less than 2147483647.
      * @param newName new patient's name.
      * @param newSurname new patient's surname.
      * @param newDiagnostic new patient's diagnostic.
@@ -55,7 +55,7 @@ public interface PatientControllerInterface {
 
     /**
      * An interface method with address "/delete-patient-by-serialNumber".
-     * @param serialNumber patient's Serial Number.
+     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
      */
     @DeleteMapping("/delete-patient-by-serialNumber")
     void deletePatient(@RequestParam int serialNumber);

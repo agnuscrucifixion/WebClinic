@@ -1,9 +1,13 @@
 package com.padwicki.webclinic.CustomExceptions;
 
-import org.springframework.core.MethodParameter;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
+/**
+ * The class exception that reacts to incorrect serial number.
+ */
 public class InvalidSerialNumberException extends RuntimeException {
+    /**
+     * Exception constructor.
+     * @param message error message.
+     */
     public InvalidSerialNumberException(String message) {
         super(message);
     }
