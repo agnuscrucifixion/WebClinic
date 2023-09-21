@@ -11,22 +11,22 @@ import java.util.List;
 @RequestMapping("/patient")
 public interface PatientControllerInterface {
     /**
-     * An interface method with address "/show-all-patients".
-     * @return a list of all patients
+     * Method of the controller for receiving all patients by service.
+     * @return a list of all patients.
      */
     @GetMapping("/show-all-patients")
     List<Patient> getPatients();
 
     /**
-     * An interface method with address "/show-patient-by-serialNumber".
+     * Searches the database for a patient with a given serial number.
      * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @return patient class object
+     * @return returns a patient object with the specified serial number or null.
      */
     @GetMapping("/show-patient-by-serialNumber")
     Patient getPatientBySerialNumber(@RequestParam int serialNumber);
 
     /**
-     * An interface method with address "/add_patient".
+     * Adds a patient to the database.
      * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
      * @param name patient's name.
      * @param surname patient's surname.
@@ -38,7 +38,7 @@ public interface PatientControllerInterface {
                            @RequestParam String diagnostic, @RequestParam String drugs);
 
     /**
-     * An interface method with address "/update-info-by-serialNumber".
+     * Updates patient information, changes information if given appropriate parameters.
      * @param oldSerialNumber old patient's Serial Number must be greater than 0 and less than 2147483647.
      * @param newSerialNumber new patient's Serial Number must be greater than 0 and less than 2147483647.
      * @param newName new patient's name.
@@ -54,7 +54,7 @@ public interface PatientControllerInterface {
                        @RequestParam(required = false) String newDrugs);
 
     /**
-     * An interface method with address "/delete-patient-by-serialNumber".
+     * Deleting a patient from the database by serial number.
      * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
      */
     @DeleteMapping("/delete-patient-by-serialNumber")
