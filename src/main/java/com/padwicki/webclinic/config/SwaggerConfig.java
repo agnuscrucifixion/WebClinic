@@ -8,7 +8,6 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
@@ -20,8 +19,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfig implements WebMvcConfigurer {
 
     /**
-     *
-     * @return Returns a Docket object that contains the controllers to be documented and groups them by name.
+     * Create a {@link Docket} object that contains the controllers to be documented and groups them by name.
+     * @return returns a Docket object.
      */
     @Bean
     public Docket api() {
@@ -32,8 +31,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
     }
 
     /**
-     *
-     * @return Returns an ApiInfo, which is user information that can be modified.
+     * Create an {@link ApiInfo} object, which is user information that can be modified.
+     * @return returns an ApiInfo object.
      */
     private ApiInfo apiInfoMetaData() {
 
