@@ -47,19 +47,30 @@ public class PatientService implements PatientServiceInterface {
     }
 
     @Override
-    public void updatePatient(int oldSerialNumber, int newSerialNumber,
+    public void updatePatient(int oldSerialNumber, Integer newSerialNumber,
                               String newName, String newSurname,
                               String newDiagnostic, String newDrugs) {
-        Patient patient = patientRepository.findPatientBySerialNumber(newSerialNumber);
-        if (patient == null) {
-            Patient oldPatient = patientRepository.findPatientBySerialNumber(oldSerialNumber);
 
-            oldPatient.setSerialNumber(newSerialNumber);
-            oldPatient.setName(newName);
-            oldPatient.setSurname(newSurname);
-            oldPatient.setDiagnosis(newDiagnostic);
-            oldPatient.setDrugs(newDrugs);
+        Patient oldPatient = patientRepository.findPatientBySerialNumber(oldSerialNumber);
+        if (oldPatient != null) {
+            if (newSerialNumber != null) {
+                oldPatient.setSerialNumber(newSerialNumber);
+            }
+            if (newName != null) {
+                oldPatient.setName(newName);
+            }
+            if (newSurname != null) {
+                oldPatient.setSurname(newSurname);
+            }
+            if (newDiagnostic != null) {
+                oldPatient.setDiagnosis(newDiagnostic);
+            }
+            if (newDrugs != null) {
+                oldPatient.setDrugs(newDrugs);
+            }
             patientRepository.save(oldPatient);
+        } else {
+            // исключение
         }
     }
 
