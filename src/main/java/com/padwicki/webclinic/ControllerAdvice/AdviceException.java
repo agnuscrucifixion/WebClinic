@@ -17,7 +17,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @RestControllerAdvice
 public class AdviceException {
     /**
-     *
+     * Gets an exception and gives a response.
      * @param e Object of the class of the exception to be caught.
      * @return Returns the response body, which includes the message and HTTP code.
      */
@@ -27,7 +27,7 @@ public class AdviceException {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
     /**
-     *
+     * Gets an exception and gives a response.
      * @param e Object of the class of the exception to be caught.
      * @return Returns the response body, which includes the message and HTTP code.
      */
@@ -37,7 +37,7 @@ public class AdviceException {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
     /**
-     *
+     * Gets an exception and gives a response.
      * @param e Object of the class of the exception to be caught.
      * @return Returns the response body, which includes the message and HTTP code.
      */
@@ -47,7 +47,7 @@ public class AdviceException {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
     /**
-     *
+     * Gets an exception and gives a response.
      * @param e Object of the class of the exception to be caught.
      * @return Returns the response body, which includes the message and HTTP code.
      */
@@ -58,7 +58,7 @@ public class AdviceException {
     }
 
     /**
-     *
+     * Gets an exception and gives a response.
      * @return Returns the response body, which includes the message and HTTP code.
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
