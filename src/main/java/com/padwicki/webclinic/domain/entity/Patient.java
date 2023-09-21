@@ -66,4 +66,17 @@ public class Patient {
      */
     public Patient() {
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", serialNumber=" + serialNumber +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", diagnosis='" + diagnosis + '\'' +
+                ", comingDate=" + comingDate +
+                ", drugs='" + drugs + '\'' +
+                '}';
+    }
 }
