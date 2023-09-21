@@ -26,48 +26,23 @@ public class PatientController implements PatientControllerInterface {
         this.patientService = patientService;
     }
 
-    /**
-     * Implementation of the controller method for receiving all patients by service.
-     * @return a list of all patients.
-     */
     @Override
     public List<Patient> getPatients() {
         return patientService.getPatients();
     }
 
-    /**
-     * Searches the database for a patient with a given serial number by service.
-     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @return returns a patient object with the specified serial number or null.
-     */
     @Override
     public Patient getPatientBySerialNumber(int serialNumber) {
         return patientService.getPatientBySerialNumber(serialNumber);
     }
 
-    /**
-     * Adds a patient to the database by service.
-     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @param name patient's name.
-     * @param surname patient's surname.
-     * @param diagnostic patient's diagnostic.
-     * @param drugs patient's drugs for heal.
-     */
+
     @Override
     public void addPatient(int serialNumber, String name, String surname,
                            String diagnostic, String drugs) {
         patientService.addPatient(serialNumber, name, surname, diagnostic, drugs);
     }
 
-    /**
-     * Updates patient information, changes information if given appropriate parameters by service.
-     * @param oldSerialNumber old patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @param newSerialNumber new patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @param newName new patient's name.
-     * @param newSurname new patient's surname.
-     * @param newDiagnostic new patient's diagnostic.
-     * @param newDrugs new patient's drugs for heal.
-     */
     @Override
     public void updatePatient(int oldSerialNumber, Integer newSerialNumber,
                               String newName, String newSurname,
@@ -75,10 +50,6 @@ public class PatientController implements PatientControllerInterface {
         patientService.updatePatient(oldSerialNumber, newSerialNumber, newName, newSurname, newDiagnostic, newDrugs);
     }
 
-    /**
-     * Deleting a patient from the database by serial number by service.
-     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
-     */
     @Override
     public void deletePatient(int serialNumber) {
         patientService.deletePatient(serialNumber);
