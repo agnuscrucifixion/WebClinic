@@ -18,9 +18,11 @@ public interface PatientControllerInterface {
                            @RequestParam String diagnostic, @RequestParam String drugs);
 
     @PatchMapping("update-info-by-serialNumber")
-    void updatePatient(@RequestParam int oldSerialNumber, @RequestParam int newSerialNumber,
-                              @RequestParam String newName, @RequestParam String newSurname,
-                              @RequestParam String newDiagnostic, @RequestParam String newDrugs);
+    void updatePatient(@RequestParam int oldSerialNumber, @RequestParam(required = false) Integer newSerialNumber,
+                       @RequestParam(required = false) String newName,
+                       @RequestParam(required = false) String newSurname,
+                       @RequestParam(required = false) String newDiagnostic,
+                       @RequestParam(required = false) String newDrugs);
 
     @DeleteMapping("/delete-patient-by-serialNumber")
     void deletePatient(@RequestParam int serialNumber);
