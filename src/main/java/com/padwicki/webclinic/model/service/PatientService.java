@@ -31,21 +31,11 @@ public class PatientService implements PatientServiceInterface {
         this.patientRepository = patientRepository;
     }
 
-    /**
-     * Implementation of the service interface method for finding all patients.
-     * @return a list of all patients.
-     */
     @Override
     public List<Patient> getPatients() {
         return patientRepository.findAll();
     }
 
-    /**
-     * Searches the database for a patient with a given serial number by repository.
-     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @return a patient object with the specified serial number or null.
-     * @throws InvalidSerialNumberException if wrong serial number.
-     */
     @Override
     public Patient getPatientBySerialNumber(int serialNumber) throws InvalidSerialNumberException {
         if (validateSerialNumber(serialNumber)) {
@@ -54,16 +44,6 @@ public class PatientService implements PatientServiceInterface {
         throw new InvalidSerialNumberException("Serial number must ne greater than 0");
     }
 
-    /**
-     * Adds a patient to the database by repository.
-     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @param name patient's name.
-     * @param surname patient's surname.
-     * @param diagnostic patient's diagnostic.
-     * @param drugs patient's drugs for heal.
-     * @throws NotDoublePatientsException if a patient with the same serial number is found.
-     * @throws InvalidSerialNumberException if wrong serial number.
-     */
     @Override
     public void addPatient(int serialNumber, String name,
                            String surname, String diagnostic,
@@ -88,17 +68,6 @@ public class PatientService implements PatientServiceInterface {
 
     }
 
-    /**
-     * Updates patient information, changes information if given appropriate parameters by repository.
-     * @param oldSerialNumber old patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @param newSerialNumber new patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @param newName new patient's name.
-     * @param newSurname new patient's surname.
-     * @param newDiagnostic new patient's diagnostic.
-     * @param newDrugs new patient's drugs for heal.
-     * @throws InvalidSerialNumberException if wrong serial number.
-     * @throws NotFoundPatientException if a patient is not found by old serial number.
-     */
     @Override
     public void updatePatient(int oldSerialNumber, Integer newSerialNumber,
                               String newName, String newSurname,
@@ -135,12 +104,6 @@ public class PatientService implements PatientServiceInterface {
         }
     }
 
-    /**
-     * Deleting a patient from the database by serial number by repository.
-     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @throws NotFoundPatientException if a patient is not found by old serial number.
-     * @throws InvalidSerialNumberException if wrong serial number.
-     */
     @Override
     public void deletePatient(int serialNumber) throws NotFoundPatientException, InvalidSerialNumberException {
         if (validateSerialNumber(serialNumber)) {
