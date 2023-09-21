@@ -12,7 +12,7 @@ public interface PatientServiceInterface {
 
         void addPatient(int serialNumber, String name, String surname,
                                String diagnostic, String drugs);
-        void updatePatient(int oldSerialNumber, int newSerialNumber,
+        void updatePatient(int oldSerialNumber, Integer newSerialNumber,
                                   String newName, String newSurname,
                                   String newDiagnostic, String newDrugs);
 
