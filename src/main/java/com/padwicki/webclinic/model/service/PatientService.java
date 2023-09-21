@@ -1,5 +1,7 @@
 package com.padwicki.webclinic.model.service;
 
+import com.padwicki.webclinic.CustomExceptions.NotDoublePatientsException;
+import com.padwicki.webclinic.CustomExceptions.NotFoundPatientException;
 import com.padwicki.webclinic.domain.entity.Patient;
 import com.padwicki.webclinic.domain.repository.PatientRepository;
 import com.padwicki.webclinic.model.serviceInjection.PatientServiceInterface;
@@ -43,6 +45,8 @@ public class PatientService implements PatientServiceInterface {
             LocalDateTime localDateTime = LocalDateTime.now();
             patient.setComingDate(Timestamp.valueOf(localDateTime));
             patientRepository.save(patient);
+        } else {
+            throw new NotDoublePatientsException("A patient with that serial number already EXISTS");
         }
     }
 
@@ -70,7 +74,7 @@ public class PatientService implements PatientServiceInterface {
             }
             patientRepository.save(oldPatient);
         } else {
-            // исключение
+            throw new NotFoundPatientException("There is NO patient to change with a given serial number");
         }
     }
 
@@ -80,6 +84,6 @@ public class PatientService implements PatientServiceInterface {
         if (patient != null) {
             patientRepository.delete(patient);
         }
-        //добавить исключения
+        throw new NotFoundPatientException("There is NO patient to remove with that serial number");
     }
 }
