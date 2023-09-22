@@ -26,14 +26,10 @@ public interface PatientControllerInterface {
     @GetMapping("/show-patient-by-serialNumber")
     Patient getPatientBySerialNumber(@RequestParam String serialNumber);
 
-//    /**
-//     * Adds a patient to the database.
-//     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
-//     * @param name patient's name.
-//     * @param surname patient's surname.
-//     * @param diagnostic patient's diagnostic.
-//     * @param drugs patient's drugs for heal.
-//     */
+    /**
+     * Adds a patient to the database.
+     * @param addPatientRqDTO {@link AddPatientRqDTO}.
+     */
     @PostMapping("/add_patient")
     void addPatient(@RequestBody AddPatientRqDTO addPatientRqDTO);
 
