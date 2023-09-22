@@ -1,4 +1,4 @@
-package com.padwicki.webclinic.CustomExceptions;
+package com.padwicki.webclinic.service.exceptions.customExceptions;
 
 /**
  * The class exception that reacts to incorrect serial number.

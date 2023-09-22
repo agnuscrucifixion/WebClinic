@@ -1,4 +1,4 @@
-package com.padwicki.webclinic.CustomExceptions;
+package com.padwicki.webclinic.service.exceptions.customExceptions;
 
 /**
  * The class exception that reacts when attempting to create a second patient with the same serial number.
