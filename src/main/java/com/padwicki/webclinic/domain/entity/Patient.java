@@ -22,49 +22,65 @@ public class Patient {
     @Column(name = "id",nullable = false, unique = true)
     @SequenceGenerator(name = "patientsIdSeq", sequenceName = "patients_id_seq", allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patientsIdSeq")
-    Long id;
+    private Long id;
 
     /**
      * Patient's serial number.
      * Individual and not repeatable.
      */
     @Column(name = "serial_number",nullable = false,unique = true)
-    int serialNumber;
+    private int serialNumber;
 
     /**
      * Patient's name.
      */
     @Column(name = "name",nullable = false)
-    String name;
+    private String name;
 
     /**
      * Patient's surname.
      */
     @Column(name = "surname",nullable = false)
-    String surname;
+    private String surname;
 
     /**
      * Patient's diagnosis
      */
     @Column(name = "diagnosis",nullable = false)
-    String diagnosis;
+    private String diagnosis;
 
     /**
      * Date and time the patient was admitted.
      */
     @Column(name = "coming_date",nullable = false)
-    Timestamp comingDate;
+    private Timestamp comingDate;
 
     /**
      *  Drugs for the patient.
      */
     @Column(name = "prescription_drugs",nullable = false)
-    String drugs;
+    private String drugs;
 
     /**
      * Empty entity constructor.
      */
     public Patient() {
+    }
+
+    /**
+     * Entity constructor
+     * @param serialNumber serial number if patient.
+     * @param name name if patient.
+     * @param surname surname if patient.
+     * @param diagnosis diagnosis if patient.
+     * @param drugs drugs if patient.
+     */
+    public Patient(int serialNumber, String name, String surname, String diagnosis, String drugs) {
+        this.serialNumber = serialNumber;
+        this.name = name;
+        this.surname = surname;
+        this.diagnosis = diagnosis;
+        this.drugs = drugs;
     }
 
     @Override
