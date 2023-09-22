@@ -49,7 +49,9 @@ public class PatientService implements PatientServiceInterface {
         log.info("Collect {}", serialNumber);
 
         if (validateSerialNumber(serialNumber)) {
-            return patientRepository.findPatientBySerialNumber(serialNumber);
+            Patient patient = patientRepository.findPatientBySerialNumber(serialNumber);
+            log.info("Get this record: {}",patient);
+            return patient;
         }
 
         log.error("In method '/show-patient-by-serialNumber' wrong input argument {} with Exception {}", serialNumber,
