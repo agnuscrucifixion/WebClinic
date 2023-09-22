@@ -1,12 +1,13 @@
 package com.padwicki.webclinic;
 
-import com.padwicki.webclinic.CustomExceptions.InvalidSerialNumberException;
-import com.padwicki.webclinic.CustomExceptions.NotDoublePatientsException;
-import com.padwicki.webclinic.CustomExceptions.NotFoundPatientException;
+import com.padwicki.webclinic.api.dto.AddPatientRqDTO;
+import com.padwicki.webclinic.service.exceptions.customExceptions.InvalidSerialNumberException;
+import com.padwicki.webclinic.service.exceptions.customExceptions.NotDoublePatientsException;
+import com.padwicki.webclinic.service.exceptions.customExceptions.NotFoundPatientException;
 import com.padwicki.webclinic.app.WebClinicApplication;
 import com.padwicki.webclinic.domain.entity.Patient;
 import com.padwicki.webclinic.domain.repository.PatientRepository;
-import com.padwicki.webclinic.model.service.PatientService;
+import com.padwicki.webclinic.service.serviceImpl.PatientService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @SpringBootTest(classes = WebClinicApplication.class)
 class PatientServiceTests {
-    private int serial = 10000;
+    private String serial = "10000";
 
     @Autowired
     private PatientService patientService;
@@ -39,9 +40,9 @@ class PatientServiceTests {
 
         patientRepository.save(patient);
 
-        if (patientService.getPatientBySerialNumber(serial) != null) {
-            patientService.deletePatient(serial);
-            assertNull(patientService.getPatientBySerialNumber(serial));
+        if (patientService.getPatientBySerialNumber(String.valueOf(patient.getSerialNumber())) != null) {
+            patientService.deletePatient(String.valueOf(patient.getSerialNumber()));
+            assertNull(patientService.getPatientBySerialNumber(String.valueOf(patient.getSerialNumber())));
         }
     }
 
@@ -51,7 +52,7 @@ class PatientServiceTests {
      */
     @Test
     void testDeleting2_withLessZeroSerialNumber_thenReturnException() throws InvalidSerialNumberException {
-        assertThrows(InvalidSerialNumberException.class, () -> patientService.deletePatient(-1));
+        assertThrows(InvalidSerialNumberException.class, () -> patientService.deletePatient("-1"));
     }
 
     /**
@@ -60,7 +61,7 @@ class PatientServiceTests {
      */
     @Test
     void testDeleting3_withNoRecordInDB_thenReturnException() throws NotFoundPatientException {
-        assertThrows(NotFoundPatientException.class, () -> patientService.deletePatient(1));
+        assertThrows(NotFoundPatientException.class, () -> patientService.deletePatient("1"));
     }
 
     /**
@@ -69,11 +70,11 @@ class PatientServiceTests {
     @Test
     void testAdding1_withNoLessZeroSerialNumberAndNotDuplicateInDB_thenReturnObject() {
         Patient patient = addOneRecord();
+        AddPatientRqDTO patientRqDTO = patientRqDTO(patient);
+        patientService.addPatient(patientRqDTO);
 
-        patientService.addPatient(patient.getSerialNumber(),patient.getName(), patient.getSurname(),
-                patient.getDiagnosis(),patient.getDrugs());
-
-        assertEquals("test", patientRepository.findPatientBySerialNumber(serial).getName());
+        assertEquals("test",
+                patientRepository.findPatientBySerialNumber(Integer.parseInt(patientRqDTO.getSerialNumber())).getName());
 
         patientService.deletePatient(serial);
     }
@@ -84,8 +85,9 @@ class PatientServiceTests {
      */
     @Test
     void testAdding2_withLessZeroSerialNumber_thenReturnException() throws InvalidSerialNumberException {
-        assertThrows(InvalidSerialNumberException.class, () -> patientService.addPatient(-1,"test",
-                "test","test","test"));
+        AddPatientRqDTO patientRqDTO =
+                patientRqDTO(new Patient(-1,"test","test","test","test"));
+        assertThrows(InvalidSerialNumberException.class, () -> patientService.addPatient(patientRqDTO));
     }
 
     /**
@@ -94,10 +96,11 @@ class PatientServiceTests {
      */
     @Test
     void testAdding3_withDuplicateInDB_thenReturnException() throws NotDoublePatientsException {
-        patientService.addPatient(10000,"test", "test","test","test");
-        assertThrows(NotDoublePatientsException.class, () -> patientService.addPatient(10000,"test",
-                "test","test","test"));
-        patientService.deletePatient(10000);
+        AddPatientRqDTO patientRqDTO =
+                patientRqDTO(new Patient(10000,"test", "test","test","test"));
+        patientService.addPatient(patientRqDTO);
+        assertThrows(NotDoublePatientsException.class, () -> patientService.addPatient(patientRqDTO));
+        patientService.deletePatient("10000");
     }
 
     /**
@@ -120,7 +123,7 @@ class PatientServiceTests {
      */
     @Test
     void testShowingRecordBySerialNumber2_withLessZeroSerialNumber_thenReturnException() throws InvalidSerialNumberException {
-        assertThrows(InvalidSerialNumberException.class,  () -> patientService.getPatientBySerialNumber(-1));
+        assertThrows(InvalidSerialNumberException.class,  () -> patientService.getPatientBySerialNumber("-1"));
     }
 
     /**
@@ -148,8 +151,8 @@ class PatientServiceTests {
      */
     @Test
     void testUpdatingRecord2_withLessZeroSerialNumber_thenReturnException() throws InvalidSerialNumberException {
-        assertThrows(InvalidSerialNumberException.class, () -> patientService.updatePatient(-1,
-                100, "test", "test", "test", "test"));
+        assertThrows(InvalidSerialNumberException.class, () -> patientService.updatePatient("-1",
+                "100", "test", "test", "test", "test"));
     }
 
     /**
@@ -159,8 +162,8 @@ class PatientServiceTests {
      */
     @Test
     void testUpdatingRecord3_withNoRecordInDB_thenReturnException() throws NotFoundPatientException {
-        assertThrows(NotFoundPatientException.class, () -> patientService.updatePatient(100,
-                100, "test", "test", "test", "test"));
+        assertThrows(NotFoundPatientException.class, () -> patientService.updatePatient("100",
+                "100", "test", "test", "test", "test"));
     }
 
     /**
@@ -175,17 +178,27 @@ class PatientServiceTests {
     }
 
     private Patient addOneRecord() {
+        int serialInteger = Integer.parseInt(serial);
         Patient patient = new Patient();
 
         patient.setName("test");
         patient.setSurname("test");
-        while (patientRepository.findPatientBySerialNumber(serial) != null) {
-            serial++;
+        while (patientRepository.findPatientBySerialNumber(serialInteger) != null) {
+            serialInteger++;
         }
-        patient.setSerialNumber(serial);
+        patient.setSerialNumber(serialInteger);
         patient.setComingDate(Timestamp.valueOf(LocalDateTime.now()));
         patient.setDiagnosis("test");
         patient.setDrugs("test");
         return patient;
+    }
+    private AddPatientRqDTO patientRqDTO(Patient patient) {
+        AddPatientRqDTO patientRqDTO = new AddPatientRqDTO();
+        patientRqDTO.setName(patient.getName());
+        patientRqDTO.setSurname(patient.getSurname());
+        patientRqDTO.setSerialNumber(String.valueOf(patient.getSerialNumber()));
+        patientRqDTO.setDiagnosis(patient.getDiagnosis());
+        patientRqDTO.setDrugs(patient.getDrugs());
+        return patientRqDTO;
     }
 }
