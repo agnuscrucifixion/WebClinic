@@ -1,8 +1,9 @@
-package com.padwicki.webclinic.controlls.controllersInjection;
+package com.padwicki.webclinic.api.controllerInterfaces;
 
+import com.padwicki.webclinic.api.dto.AddPatientRqDTO;
 import com.padwicki.webclinic.domain.entity.Patient;
 import org.springframework.web.bind.annotation.*;
-import com.padwicki.webclinic.controlls.controllers.PatientController;
+import com.padwicki.webclinic.api.controllers.PatientController;
 import java.util.List;
 
 /**
@@ -23,19 +24,18 @@ public interface PatientControllerInterface {
      * @return returns a patient object with the specified serial number or null.
      */
     @GetMapping("/show-patient-by-serialNumber")
-    Patient getPatientBySerialNumber(@RequestParam int serialNumber);
+    Patient getPatientBySerialNumber(@RequestParam String serialNumber);
 
-    /**
-     * Adds a patient to the database.
-     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
-     * @param name patient's name.
-     * @param surname patient's surname.
-     * @param diagnostic patient's diagnostic.
-     * @param drugs patient's drugs for heal.
-     */
+//    /**
+//     * Adds a patient to the database.
+//     * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
+//     * @param name patient's name.
+//     * @param surname patient's surname.
+//     * @param diagnostic patient's diagnostic.
+//     * @param drugs patient's drugs for heal.
+//     */
     @PostMapping("/add_patient")
-    void addPatient(@RequestParam int serialNumber, @RequestParam String name, @RequestParam String surname,
-                           @RequestParam String diagnostic, @RequestParam String drugs);
+    void addPatient(@RequestBody AddPatientRqDTO addPatientRqDTO);
 
     /**
      * Updates patient information, changes information if given appropriate parameters.
@@ -47,7 +47,7 @@ public interface PatientControllerInterface {
      * @param newDrugs new patient's drugs for heal.
      */
     @PatchMapping("/update-info-by-serialNumber")
-    void updatePatient(@RequestParam int oldSerialNumber, @RequestParam(required = false) Integer newSerialNumber,
+    void updatePatient(@RequestParam String oldSerialNumber, @RequestParam(required = false) String newSerialNumber,
                        @RequestParam(required = false) String newName,
                        @RequestParam(required = false) String newSurname,
                        @RequestParam(required = false) String newDiagnostic,
@@ -58,5 +58,5 @@ public interface PatientControllerInterface {
      * @param serialNumber patient's Serial Number must be greater than 0 and less than 2147483647.
      */
     @DeleteMapping("/delete-patient-by-serialNumber")
-    void deletePatient(@RequestParam int serialNumber);
+    void deletePatient(@RequestParam String serialNumber);
 }

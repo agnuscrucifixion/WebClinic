@@ -1,8 +1,9 @@
-package com.padwicki.webclinic.controlls.controllers;
+package com.padwicki.webclinic.api.controllers;
 
-import com.padwicki.webclinic.controlls.controllersInjection.PatientControllerInterface;
+import com.padwicki.webclinic.api.controllerInterfaces.PatientControllerInterface;
+import com.padwicki.webclinic.api.dto.AddPatientRqDTO;
 import com.padwicki.webclinic.domain.entity.Patient;
-import com.padwicki.webclinic.model.service.PatientService;
+import com.padwicki.webclinic.service.serviceImpl.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,26 +33,24 @@ public class PatientController implements PatientControllerInterface {
     }
 
     @Override
-    public Patient getPatientBySerialNumber(int serialNumber) {
+    public Patient getPatientBySerialNumber(String serialNumber) {
         return patientService.getPatientBySerialNumber(serialNumber);
     }
 
-
     @Override
-    public void addPatient(int serialNumber, String name, String surname,
-                           String diagnostic, String drugs) {
-        patientService.addPatient(serialNumber, name, surname, diagnostic, drugs);
+    public void addPatient(AddPatientRqDTO addPatientRqDTO) {
+        patientService.addPatient(addPatientRqDTO);
     }
 
     @Override
-    public void updatePatient(int oldSerialNumber, Integer newSerialNumber,
+    public void updatePatient(String oldSerialNumber, String newSerialNumber,
                               String newName, String newSurname,
                               String newDiagnostic, String newDrugs) {
         patientService.updatePatient(oldSerialNumber, newSerialNumber, newName, newSurname, newDiagnostic, newDrugs);
     }
 
     @Override
-    public void deletePatient(int serialNumber) {
+    public void deletePatient(String serialNumber) {
         patientService.deletePatient(serialNumber);
     }
 }
