@@ -29,22 +29,13 @@ class PatientServiceTests {
     @Autowired
     private PatientRepository patientRepository;
 
+
     /**
      * Deletion test to check for performance with valid data.
      */
     @Test
     void testDeleting1_withNotLessZeroSerialNumber_thenReturnNull() {
-        Patient patient = new Patient();
-
-        patient.setName("test");
-        patient.setSurname("test");
-        while (patientRepository.findPatientBySerialNumber(serial) != null) {
-            serial++;
-        }
-        patient.setSerialNumber(serial);
-        patient.setComingDate(Timestamp.valueOf(LocalDateTime.now()));
-        patient.setDiagnosis("test");
-        patient.setDrugs("test");
+        Patient patient = addOneRecord();
 
         patientRepository.save(patient);
 
@@ -77,17 +68,7 @@ class PatientServiceTests {
      */
     @Test
     void testAdding1_withNoLessZeroSerialNumberAndNotDuplicateInDB_thenReturnObject() {
-        Patient patient = new Patient();
-
-        patient.setName("test");
-        patient.setSurname("test");
-        while (patientRepository.findPatientBySerialNumber(serial) != null) {
-            serial++;
-        }
-        patient.setSerialNumber(serial);
-        patient.setComingDate(Timestamp.valueOf(LocalDateTime.now()));
-        patient.setDiagnosis("test");
-        patient.setDrugs("test");
+        Patient patient = addOneRecord();
 
         patientService.addPatient(patient.getSerialNumber(),patient.getName(), patient.getSurname(),
                 patient.getDiagnosis(),patient.getDrugs());
@@ -124,17 +105,7 @@ class PatientServiceTests {
      */
     @Test
     void testShowingRecordBySerialNumber1_withNoLessZeroSerialNumber_thenReturnRecord() {
-        Patient patient = new Patient();
-
-        patient.setName("test");
-        patient.setSurname("test");
-        while (patientRepository.findPatientBySerialNumber(serial) != null) {
-            serial++;
-        }
-        patient.setSerialNumber(serial);
-        patient.setComingDate(Timestamp.valueOf(LocalDateTime.now()));
-        patient.setDiagnosis("test");
-        patient.setDrugs("test");
+        Patient patient = addOneRecord();
 
         patientRepository.save(patient);
 
@@ -157,17 +128,7 @@ class PatientServiceTests {
      */
     @Test
     void testUpdatingRecord1_withNoRequiredParam_thenReturnUpdateRecord() {
-        Patient patient = new Patient();
-
-        patient.setName("test");
-        patient.setSurname("test");
-        while (patientRepository.findPatientBySerialNumber(serial) != null) {
-            serial++;
-        }
-        patient.setSerialNumber(serial);
-        patient.setComingDate(Timestamp.valueOf(LocalDateTime.now()));
-        patient.setDiagnosis("test");
-        patient.setDrugs("test");
+        Patient patient = addOneRecord();
 
         patientRepository.save(patient);
 
@@ -211,5 +172,20 @@ class PatientServiceTests {
         List<Patient> expectedList = patientRepository.findAll();
 
         assertEquals(realList.toString(),expectedList.toString());
+    }
+
+    private Patient addOneRecord() {
+        Patient patient = new Patient();
+
+        patient.setName("test");
+        patient.setSurname("test");
+        while (patientRepository.findPatientBySerialNumber(serial) != null) {
+            serial++;
+        }
+        patient.setSerialNumber(serial);
+        patient.setComingDate(Timestamp.valueOf(LocalDateTime.now()));
+        patient.setDiagnosis("test");
+        patient.setDrugs("test");
+        return patient;
     }
 }
