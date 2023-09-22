@@ -1,9 +1,9 @@
-package com.padwicki.webclinic.ControllerAdvice;
+package com.padwicki.webclinic.service.exceptions.advice;
 
-import com.padwicki.webclinic.CustomExceptions.ErrorResponsePatient;
-import com.padwicki.webclinic.CustomExceptions.InvalidSerialNumberException;
-import com.padwicki.webclinic.CustomExceptions.NotDoublePatientsException;
-import com.padwicki.webclinic.CustomExceptions.NotFoundPatientException;
+import com.padwicki.webclinic.service.exceptions.customExceptions.ErrorResponsePatient;
+import com.padwicki.webclinic.service.exceptions.customExceptions.InvalidSerialNumberException;
+import com.padwicki.webclinic.service.exceptions.customExceptions.NotDoublePatientsException;
+import com.padwicki.webclinic.service.exceptions.customExceptions.NotFoundPatientException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
